@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+
 const Homepage =() =>{
   return (
     <div>
@@ -13,7 +14,7 @@ const Homepage =() =>{
     </header>
     
     <div>
-       <div className="h-screen bg-cover bg-center" style={{ backgroundImage: "url('./assets/images/homepage')" }}></div>
+    <div className="h-screen bg-cover bg-center" style={{ backgroundImage: "url('./src/assets/images/landingpage.jpg')" }}></div>
 
       {/* Overlay-text */}
       <div className="text-red-800">

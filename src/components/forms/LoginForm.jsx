@@ -5,6 +5,7 @@ const LoginForm = () => {
 
   return (
     <div className=" log-in flex flex-col justify-center items-center h-screen text-xs">
+      <div className="h-screen bg-cover bg-center" style={{ backgroundImage: "url('./src/assets/images/landingpage.jpg')" }}></div>
       <div className=" max-w-sm w-full bg-white shadow-lg rounded-lg p-6 border border-black">
         <form className="flex flex-col gap-3">
           <div className="flex flex-col gap-3">
@@ -36,7 +37,7 @@ const LoginForm = () => {
             <span className="font-bold">
               {" "}
               <input type="checkbox" />
-              Remeber ME
+              Forgot password
             </span>
             <button className=" flex justify-center bg-green-500 p-2 rounded-lg">
               login
