@@ -6,6 +6,10 @@ import SignupForm from './components/forms/SignupForm'
 import LandingPage from './pages/LandingPage'
 import Homepage from './pages/Homepage'
 import PrivacyPolicy from './components/forms/PrivacyPolicy'
+import Footer from './components/layout/Footer'
+import Sidebar from './components/layout/Sidebar'
+import Dashboard from './pages/Dashboard'
+import AddStudioForm from './components/forms/AddStudioForm'
 
 const App=() => {
   const router=createBrowserRouter([
@@ -35,6 +39,24 @@ const App=() => {
       path:"/PrivacyPolicy",
       element: <PrivacyPolicy/>
     },
+    {
+      path:"/footer",
+      element:<Footer/>
+    },
+   
+    {
+      path:"/Sidebar",
+      element:<Sidebar/>
+    },
+    {
+      path:"/Dashboard",
+      element:<Dashboard/>
+    },
+    {
+      path:"/AddStudio",
+      element:<AddStudioForm/>
+    }
+
   ]);
   
 

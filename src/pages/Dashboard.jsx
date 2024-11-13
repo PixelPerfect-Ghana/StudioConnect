@@ -1,54 +1,17 @@
-// Dashboard.js
-import React from 'react';
-import Sidebar from './Sidebar';
-import WelcomeSection from './sections/WelcomeSection';
-import StudioDiscovery from './sections/User/StudioDiscovery';
-import Bookings from './sections/User/Bookings';
-import Favorites from './sections/User/Favorites';
-import MyStudios from './sections/StudioOwner/MyStudios';
-import BookingsManagement from './sections/StudioOwner/BookingsManagement';
-import StudioAnalytics from './sections/StudioOwner/StudioAnalytics';
-import StudioManagement from './sections/StudioOwner/StudioManagement';
-import UserManagement from './sections/Admin/UserManagement';
-import StudioVerification from './sections/Admin/StudioVerification';
-import ReportsFeedback from './sections/Admin/ReportsFeedback';
-import AnalyticsDashboard from './sections/Admin/AnalyticsDashboard';
 
-const Dashboard = ({ user }) => {
-  const role = user.role;
+import Sidebar from '../components/layout/Sidebar';
 
+const Dashboard = ({ userRole }) => {
   return (
-    <div className="flex h-screen bg-gray-100">
-      <Sidebar role={role} />
-      <div className="flex-1 p-8 overflow-y-auto">
-        <WelcomeSection name={user.name} />
-
-        {/* Role-Specific Sections */}
-        {role === 'User' && (
-          <div>
-            <StudioDiscovery />
-            <Bookings />
-            <Favorites />
-          </div>
-        )}
-
-        {role === 'StudioOwner' && (
-          <div>
-            <MyStudios />
-            <BookingsManagement />
-            <StudioAnalytics />
-            <StudioManagement />
-          </div>
-        )}
-
-        {role === 'Admin' && (
-          <div>
-            <UserManagement />
-            <StudioVerification />
-            <ReportsFeedback />
-            <AnalyticsDashboard />
-          </div>
-        )}
+    <div className="flex">
+      <Sidebar userRole={userRole} />
+      <div className="flex-grow p-6">
+        <h1 className="text-2xl font-bold">Dashboard</h1>
+        <div className="mt-4">
+          {userRole === 'User' && <p>Welcome Back! Discover Studios, Create Lasting Memories .</p>}
+          {userRole === 'StudioOwner' && <p>Your Studio, Your Story; Connect with Creators.</p>}
+          {userRole === 'Admin' && <p>Your Command Center for Studios and Users.</p>}
+        </div>
       </div>
     </div>
   );

@@ -9,25 +9,29 @@ const LandingPage = () => {
 
   return (
     <div className="relative h-screen overflow-hidden">
-      {/* Header on top of the video */}
       <header className="absolute top-0 left-0 w-full flex items-center justify-between p-6 bg-black bg-opacity-50 z-10">
-        <div className="text-2xl font-bold text-white">PixelPerfect</div>
-        <nav className="flex items-center space-x-6">
-          <a href="#" className="text-white hover:text-green-600">Browse Studios</a>
-          <Link to="/LoginForm" className="text-white hover:text-green-600">Log In</Link>
-          <Link to="/SignupForm" className="text-white hover:text-green-600">Sign Up</Link>
-        </nav>
+       <div className="text-2xl font-bold text-white">PixelPerfect</div>
+          <nav className="flex items-center space-x-6">
+           <a href="#" className="text-white hover:text-green-600">Browse Studios</a>
+           <Link to="/LoginForm">
+           <span className="text-white hover:text-green-600">Log In</span>
+           </Link>
+    
+           <Link to="/SignupForm" className="text-white hover:text-green-600">
+            Sign Up
+           </Link>
+          </nav>
       </header>
       {/* Background video */}
       <video
         className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-        src="./src/assets/video/landingvideo.mp4"
+        src="./src/assets/video/landing.mp4"
         autoPlay
         loop
         muted
       ></video>
 
-      {/* Centered Search Section */}
+      
       <section className="relative h-full flex items-center justify-center z-10">
         <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 bg-white bg-opacity-90 p-6 rounded-md shadow-lg">
           <input
@@ -63,8 +67,6 @@ const LandingPage = () => {
           </button>
         </div>
       </section>
-
-      {/* Footer */}
       <Footer />
     </div>
   );
