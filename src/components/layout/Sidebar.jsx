@@ -1,12 +1,24 @@
-// Sidebar.jsx
-import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ userRole }) => {
+  const [loading, setLoading]=useState(false);
+  const navigate = useNavigate(); 
+ const handleLogout =() => {
+  setLoading(true)
+  localStorage.removeItem("token");
+
+  toast.success("you are logging out")
+  navigate("/HomePage")
+
+ }
   return (
     <div className="w-64 bg-gray-800 text-white h-screen p-4">
-      <h2 className="text-xl font-bold mb-4">StudioConnect</h2>
+      <h2 className="text-xl font-bold mb-4">PixelPerfect</h2>
       <nav>
         <Link to="/dashboard" className="block py-2">Home</Link>
+        <a href="" onClick={handleLogout} className='block py-2'>Logout </a>
 
         {/* Links specific to each user role */}
         {userRole === 'User' && (

@@ -4,7 +4,7 @@ import React from "react";
 const PrivacyPolicy = () => {
   return (
     <div style={{ padding: "20px", maxWidth: "800px", margin: "auto" }}>
-      <h1 className="font-bold text-2xl">Privacy Policy for StudioConnect</h1>
+      <h1 className="font-bold text-2xl">Privacy Policy for PixelPerfect</h1>
       <p><strong>Last Updated:</strong> [06/11/2024]</p>
       <div className="mt-8">
        <p >At StudioConnect we respects your privacy and is committed to protecting the personal information you share when signing up to use our services. This Privacy Policy explains how we collect, use, disclose, and protect your information.</p>

@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { apiSignupForm } from "../../services/authStudios";
+import { apiSignupForm } from "../../services/auth";
 
 const SignupForm = () => {
   const [role, setRole] = useState("");
@@ -20,23 +20,24 @@ const SignupForm = () => {
 
       // Extract form data
       const name = formData.get("name");
-      const studioName = formData.get("studioName"); // Updated variable name
+      // const studioName = formData.get("studioName"); // Updated variable name
       const email = formData.get("email");
       const password = formData.get("password");
-      const confirmPassword = formData.get("confirmPassword");
-      const location = formData.get("location");
+      // const confirmPassword = formData.get("confirmPassword");
+      // const location = formData.get("location");
+      //  const role = formData.get("role");
 
       console.log("Full Name:", name); // Logs the full name
 
       // Prepare the payload with the selected role and other data
       const payload = {
         name,
-        studioName,
+        // studioName,
         email,
         password,
-        confirmPassword,
-        location,
-        role, 
+        // confirmPassword,
+        // location,
+        //  role,
       };
 
       // Call the signup API
@@ -44,7 +45,6 @@ const SignupForm = () => {
       console.log(response.data);
       toast.success("Account Registered Successfully. Proceed to log in");
       navigate("/LoginForm");
-
     } catch (error) {
       console.error("Signup error:", error);
       console.error("full error object:", error);
@@ -55,35 +55,44 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="log-in flex flex-col justify-center items-center h-screen text-xs bg-cover bg-center"
-      style={{ backgroundImage: "url('./src/assets/images/studio2.jpg')" }}>
-      
-      <div className="text-black text-xs flex flex-col justify-center items-center h-[80vh]">
+    <div
+      className="log-in flex flex-col justify-center items-center h-screen text-xs bg-cover bg-center"
+      style={{ backgroundImage: "url('./src/assets/images/studio2.jpg')" }}
+    >
+      <div className="text-black text-xs flex flex-col justify-center items-center h-[60vh]">
         <div className="max-w-sm w-full shadow-lg  border rounded-lg p-6 bg-transparent my-11">
           <form onSubmit={handleSubmit}>
             <h1 className="flex justify-center mb-3 text-lg">Register With</h1>
             <div className="flex font-bold gap-3 mb-8 justify-center">
               {/* Social Media Buttons */}
-              <button type="button" className="bg-white border rounded-md w-32 p-2 flex items-center justify-center">
+              <button
+                type="button"
+                className="bg-white border rounded-md w-32 p-2 flex items-center justify-center"
+              >
                 <span className="mr-1">
                   <i className="fa-brands fa-facebook"></i>
                 </span>
                 Facebook
               </button>
-              <button type="button" className="bg-white border rounded-md w-32 p-2 flex items-center justify-center">
+              <button
+                type="button"
+                className="bg-white border rounded-md w-32 p-2 flex items-center justify-center"
+              >
                 <span className="mr-1">
                   <i className="fa-brands fa-google"></i>
                 </span>
                 Google
               </button>
-              <button type="button" className="bg-white border rounded-md w-32 p-2 flex items-center justify-center">
+              <button
+                type="button"
+                className="bg-white border rounded-md w-32 p-2 flex items-center justify-center"
+              >
                 <span className="mr-1">
                   <i className="fa-brands fa-apple"></i>
                 </span>
                 AppleID
               </button>
             </div>
-
             <div className="space-y-4">
               <div className="w-full">
                 <label className="block mb-1">Full Name</label>
@@ -105,13 +114,12 @@ const SignupForm = () => {
                   className="border p-2 rounded w-full"
                   value={role}
                   onChange={handleRoleChange}
-                  required
                   name="role"
                 >
                   <option value="">Select Role</option>
-                  <option value="ADMIN">ADMIN</option>
-                  <option value="USER">USER</option>
-                  <option value="STUDIO_OWNER">STUDIO OWNER</option>
+                  <option value="admin">ADMIN</option>
+                  <option value="user">USER</option>
+                  <option value="owner">STUDIO OWNER</option>
                 </select>
               </div>
 
@@ -139,7 +147,6 @@ const SignupForm = () => {
                     className="w-full bg-transparent focus:ring-2"
                     type="text"
                     placeholder="Enter location"
-                    required
                     name="location"
                   />
                 </div>
@@ -182,7 +189,7 @@ const SignupForm = () => {
                     type="password"
                     placeholder="Confirm password"
                     required
-                    name="confirmPassword"
+                    name="password"
                   />
                 </div>
               </div>
@@ -193,7 +200,7 @@ const SignupForm = () => {
               className="w-full mt-6 bg-green-500 p-2 rounded-lg text-white hover:bg-gray-700 duration-300"
               disabled={loading} // Disables the button when loading
             >
-              {loading ? "Signing Up..." : "Sign Up"}
+              {loading ? "Registering..." : "Sign Up"}
             </button>
 
             <div className="text-xs mt-2 text-center">

@@ -1,7 +1,8 @@
 
 import Sidebar from '../components/layout/Sidebar';
 
-const Dashboard = ({ userRole }) => {
+const Dashboard = () => {
+  const userRole= localStorage.getItem("role")
   return (
     <div className="flex">
       <Sidebar userRole={userRole} />

@@ -6,9 +6,7 @@ const Homepage = () => {
       <header className="flex items-center justify-between p-6 bg-black shadow-md">
         <div className="text-2xl font-bold text-white">PixelPerfect</div>
         <nav className="flex items-center space-x-6">
-          <Link to="/StudioAdv" className="text-white hover:text-green-600">
-            Browse Studios
-          </Link>
+          <Link to="/StudioList" className="text-white hover:text-green-600">Browse Studios</Link>
           <Link to="/LandingPage" className="text-white hover:text-green-600">
             Get Started
           </Link>

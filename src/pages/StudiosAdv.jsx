@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
 const StudioAdv = ({ image, StudioName, location, description }) => {
   return (
     <div className="max-w-sm w-full bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <img
         className="w-full h-48 object-cover"
-        src={image}
-        alt={name}
+        src={image} // Update to actual image path or URL if needed
+        alt={StudioName}
       />
       <div className="p-4">
         <h2 className="text-lg font-semibold text-gray-800">{StudioName}</h2>

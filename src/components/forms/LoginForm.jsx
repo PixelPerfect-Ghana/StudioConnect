@@ -1,27 +1,35 @@
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { apiSignin } from "../../services/authStudios"; // Ensure you have the correct import for apiSignin
+import { useState } from "react";
+import { apiLoginForm } from "../../services/auth";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // Loading state
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Fixed the preventDefault issue
+    event.preventDefault();
+    setLoading(true); // Set loading to true when login starts
     try {
       const formData = new FormData(event.target);
       const email = formData.get("email");
       const password = formData.get("password");
 
-      const response = await apiSignin({ email, password });
+      const response = await apiLoginForm({ email, password });
 
       if (response.status === 200) {
         localStorage.setItem("token", response.data.accessToken);
-        toast.success("You are Logged In");
+        // localStorage.setItem("role", response.data.role);
+        toast.success("You are logged in"); // Toast success notification
         navigate("/dashboard");
+      } else {
+        toast.error("Failed to log in"); // Toast error notification
       }
     } catch (error) {
-      console.log(error);
-      toast.error("Failed to Log In");
+      console.error(error);
+      toast.error("Failed to log in"); // Toast error notification
+    } finally {
+      setLoading(false); // Reset loading state after login attempt
     }
   };
 
@@ -63,8 +71,9 @@ const LoginForm = () => {
             <button
               type="submit"
               className="flex justify-center bg-green-500 p-2 rounded-lg"
+              disabled={loading} // Disable button when loading
             >
-              Login
+              {loading ? "Logging in..." : "Login"} {/* Button text changes based on loading state */}
             </button>
             <div>
               <span className="flex justify-center mb-4">or sign in with</span>
