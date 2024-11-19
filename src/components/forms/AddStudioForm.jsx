@@ -11,10 +11,10 @@ const AddStudioForm = () => {
     const formData = new FormData(e.target)
     try {
       setLoading(true)
-      // const response = await apiCreateStudio(
-      // formData)
-      // console.log(response.data)
-      // navigate('/studios')
+       const response = await apiCreateStudio(
+      formData)
+      console.log(response.data)
+       navigate('/studioList')
     } catch (error) {
       console.log("error creating studio", error)
     }finally{
@@ -92,10 +92,12 @@ const AddStudioForm = () => {
           />
         </div>
 
-        <button
+        <button onSubmit={handleSubmit}
           type="submit"
           className="w-full bg-green-500 text-white p-2 rounded-md font-semibold hover:bg-green-600 transition duration-300"
+          disabled={loading}
         >
+          {loading ? "Adding Studiio..." : ""}
           Add Studio
         </button>
       </form>

@@ -19,7 +19,7 @@ const StudiosListPage = () => {
         <h2 className="text-xl font-bold mb-4">PixelPerfect</h2>
         <Link to="/homePage" className="block py-2 hover:underline">Home</Link>
         <Link to="/studios" className="block py-2 hover:underline">Studios</Link>
-        <Link to="/contact" className="block py-2 hover:underline">Logout</Link>
+        <Link to="/homePage" className="block py-2 hover:underline">Logout</Link>
       </nav>
 
       {/* Main Content */}
