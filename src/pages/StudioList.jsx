@@ -1,5 +1,6 @@
 import React from "react";
-import StudiosAdv from "../pages/StudiosAdv"; 
+import { Link } from "react-router-dom";
+import StudiosAdv from "../pages/StudiosAdv";
 
 // Mock data for studios
 const studios = [
@@ -12,18 +13,29 @@ const studios = [
 
 const StudiosListPage = () => {
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-semibold text-center mb-6">Our Studios</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {studios.map((studio) => (
-          <StudiosAdv
-            key={studio.id}
-            image={studio.image}
-            StudioName={studio.name}
-            location={studio.location}
-            description={studio.description}
-          />
-        ))}
+    <div className="flex">
+      {/* Sidebar Navigation */}
+      <nav className="w-64 bg-gray-800 text-white h-screen p-4">
+        <h2 className="text-xl font-bold mb-4">PixelPerfect</h2>
+        <Link to="/homePage" className="block py-2 hover:underline">Home</Link>
+        <Link to="/studios" className="block py-2 hover:underline">Studios</Link>
+        <Link to="/contact" className="block py-2 hover:underline">Logout</Link>
+      </nav>
+
+      {/* Main Content */}
+      <div className="flex-1 p-8 bg-slate-600">
+        <h1 className="text-3xl font-semibold text-center mb-6">Our Studios</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {studios.map((studio) => (
+            <StudiosAdv
+              key={studio.id}
+              image={studio.image}
+              StudioName={studio.name}
+              location={studio.location}
+              description={studio.description}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

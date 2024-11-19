@@ -1,9 +1,9 @@
 
-// StudioDetails.js
+
 import React from "react";
 import { useParams } from "react-router-dom";
 
-// Sample data for testing
+// dummy data
 const sampleStudios = [
   {
     id: 1,
@@ -19,14 +19,13 @@ const sampleStudios = [
     description: "A modern studio with all the latest equipment.",
     images: ["/path/to/image1.jpg", "/path/to/image2.jpg", "/path/to/image3.jpg"],
   },
-  // Add more sample studio data as needed
+  
 ];
 
 const StudioDetails = () => {
   const { studioId } = useParams();
   const studio = sampleStudios.find((studio) => studio.id === parseInt(studioId));
 
-  if (!studio) return <p>Studio not found.</p>;
 
   return (
     <div className="max-w-3xl mx-auto p-6">
@@ -42,6 +41,7 @@ const StudioDetails = () => {
             className="w-1/3 rounded-md"
           />
         ))}
+        <Link to="/BookingForm"><button className="bg-green-500 text-white text-sm font-semibold p-2 rounded-md hover:bg-green-600 transition-colors">Book Us</button></Link>
       </div>
     </div>
   );

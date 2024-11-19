@@ -1,30 +1,28 @@
 import React, { useState } from 'react';
+import { apiCreateStudio } from '../../services/Studios';
+import { useNavigate } from 'react-router-dom';
 
-const AddStudioForm = ({ onSubmit }) => {
-  const [studioData, setStudioData] = useState({
-    name: '',
-    location: '',
-    description: '',
-    contactEmail: '',
-    image: null,
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setStudioData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleImageUpload = (e) => {
-    setStudioData((prevData) => ({ ...prevData, image: e.target.files[0] }));
-  };
-
-  const handleSubmit = (e) => {
+const AddStudioForm = () => {
+  const [loading, setLoading] =  useState(false)
+  const navigate = useNavigate()
+ 
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (onSubmit) {
-      onSubmit(studioData);
+    const formData = new FormData(e.target)
+    try {
+      setLoading(true)
+      // const response = await apiCreateStudio(
+      // formData)
+      // console.log(response.data)
+      // navigate('/studios')
+    } catch (error) {
+      console.log("error creating studio", error)
+    }finally{
+      setLoading(false)
     }
+    
+
     // Clear form after submission
-    setStudioData({ name: '', location: '', description: '', contactEmail: '', image: null });
   };
 
   return (
@@ -38,33 +36,34 @@ const AddStudioForm = ({ onSubmit }) => {
           <input
             type="text"
             name="name"
-            value={studioData.name}
-            onChange={handleChange}
             required
             className="w-full p-2 border rounded-md focus:outline-none focus:border-green-500"
             placeholder="Enter studio name"
           />
         </div>
         
-        <div className="mb-4">
-          <label className="block text-sm font-semibold text-white mb-1">Location</label>
-          <input
-            type="text"
-            name="location"
-            value={studioData.location}
-            onChange={handleChange}
-            required
-            className="w-full p-2 border rounded-md focus:outline-none focus:border-green-500"
-            placeholder="Enter location"
-          />
-        </div>
+        <select
+        name=''
+            className="border p-2 rounded w-36  text-gray-400"
+            
+          >
+            <option value="">Location</option>
+            <option value="Upper East Region">Upper East Region</option>
+            <option value="Upper West Region">Upper West Region</option>
+            <option value="Northern Region">Northern Region</option>
+            <option value="Eastern Region">Eastern Region</option>
+            <option value="Brong-Ahafo Region">Brong-Ahafo Region</option>
+            <option value="Central Region">Central Region</option>
+            <option value="Ashanti Region">Ashanti Region</option>
+            <option value="Volta Region">Volta Region</option>
+            <option value="Western Region">Western Region</option>
+            <option value="Greater Accra">Greater Accra</option>
+          </select>
 
         <div className="mb-4">
           <label className="block text-sm font-semibold text-white mb-1">Description</label>
           <textarea
             name="description"
-            value={studioData.description}
-            onChange={handleChange}
             required
             className="w-full p-2 border rounded-md focus:outline-none focus:border-green-500"
             placeholder="Describe your studio"
@@ -77,8 +76,7 @@ const AddStudioForm = ({ onSubmit }) => {
           <input
             type="email"
             name="contactEmail"
-            value={studioData.contactEmail}
-            onChange={handleChange}
+
             required
             className="w-full p-2 border rounded-md focus:outline-none focus:border-green-500"
             placeholder="Enter contact email"
@@ -89,7 +87,6 @@ const AddStudioForm = ({ onSubmit }) => {
           <label className="block text-sm font-semibold text-white mb-1">Upload Image</label>
           <input
             type="file"
-            onChange={handleImageUpload}
             accept="image/*"
             className="w-full p-2 border rounded-md focus:outline-none focus:border-green-500"
           />

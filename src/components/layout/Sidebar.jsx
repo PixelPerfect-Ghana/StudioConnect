@@ -23,20 +23,14 @@ const Sidebar = ({ userRole }) => {
         {/* Links specific to each user role */}
         {userRole === 'User' && (
           <>
-            <Link to="/explore" className="block py-2">Explore Studios</Link>
+            <Link to="/studioList" className="block py-2">Explore Studios</Link>
             <Link to="/bookings" className="block py-2">My Bookings</Link>
           </>
         )}
-        {userRole === 'StudioOwner' && (
+        {userRole === 'vendor' && (
           <>
             <Link to="/manage-studios" className="block py-2">Manage Studios</Link>
             <Link to="/bookings" className="block py-2">View Bookings</Link>
-          </>
-        )}
-        {userRole === 'Admin' && (
-          <>
-            <Link to="/manage-users" className="block py-2">Manage Users</Link>
-            <Link to="/analytics" className="block py-2">Analytics</Link>
           </>
         )}
       </nav>

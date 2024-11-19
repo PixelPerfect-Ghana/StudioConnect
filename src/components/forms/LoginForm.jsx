@@ -10,28 +10,55 @@ const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true); // Set loading to true when login starts
+  
     try {
+      // Retrieve form data
       const formData = new FormData(event.target);
       const email = formData.get("email");
       const password = formData.get("password");
-
+  
+      // Send login request
       const response = await apiLoginForm({ email, password });
-
+  
+      // Handle response
       if (response.status === 200) {
         localStorage.setItem("token", response.data.accessToken);
-        // localStorage.setItem("role", response.data.role);
-        toast.success("You are logged in"); // Toast success notification
+  
+        if (response.data.role === "owner") {
+          localStorage.setItem("ownerRole", response.data.role);
+        } else {
+          localStorage.setItem("userRole", response.data.role);
+        }
+  
+        // Notify success and navigate to the dashboard
+        toast.success("You are logged in");
         navigate("/dashboard");
       } else {
-        toast.error("Failed to log in"); // Toast error notification
+        // Handle unsuccessful login attempt
+        toast.error("Failed to log in");
+        return; // Stop further execution
       }
     } catch (error) {
+      // Handle errors during the login process
       console.error(error);
-      toast.error("Failed to log in"); // Toast error notification
+      toast.error("An unexpected error occurred");
     } finally {
-      setLoading(false); // Reset loading state after login attempt
+      // Reset loading state after login attempt
+      setLoading(false);
     }
   };
+  
+      
+    //    else {
+    //     toast.error("Failed to log in"); // Toast error notification
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    //   toast.error("Failed to log in"); // Toast error notification
+    // } finally {
+    //   setLoading(false); // Reset loading state after login attempt
+    // }
+
 
   return (
     <div 
@@ -112,5 +139,6 @@ const LoginForm = () => {
     </div>
   );
 };
+
 
 export default LoginForm;
