@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
 // Mock data for studios
@@ -43,6 +43,7 @@ const LandingPage = () => {
   const [query, setQuery] = useState("");
   const [location, setLocation] = useState("");
   const [filteredStudios, setFilteredStudios] = useState(studios);
+  const navigate = useNavigate();
 
   const handleSearch = () => {
     const results = studios.filter((studio) => {
@@ -59,21 +60,31 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="relative h-screen overflow-hidden">
-      <header className="fixed top-0 left-0 w-full flex items-center justify-between p-6 bg-black bg-opacity-50 z-50">
+    <div className="relative h-screen ">
+      <header className="fixed top-0 left-0 w-full flex items-center justify-between p-6 py-8 bg-black bg-opacity-50 z-50">
         <div className="text-2xl font-bold text-white">PixelPerfect</div>
         <nav className="flex items-center space-x-6">
-          <Link to="/studioList">
-            <a href="#" className="text-white hover:text-green-600">
-              Browse Studios
-            </a>
+          <Link to="/studioList" className="text-white hover:text-green-600">
+            Browse Studios
           </Link>
-          <Link to="/login">
-            <span className="text-white hover:text-green-600">Log In</span>
+          <Link to="/studioList" className="text-white hover:text-green-600">
+            About Us
           </Link>
-          <Link to="/signup" className="text-white hover:text-green-600">
+          <Link to="/studioList" className="text-white hover:text-green-600">
+            Contact Us
+          </Link>
+          <button
+            onClick={() => navigate("/login")}
+            className="bg-white text-black px-8 font-bold py-2 hover:text-green-600 rounded-md"
+          >
+            Log In
+          </button>
+          <button
+            onClick={() => navigate("/signup")}
+            className="bg-green-500 text-white px-8 font-bold py-2 hover:text-black hover:bg-white rounded-md"
+          >
             Sign Up
-          </Link>
+          </button>
         </nav>
       </header>
 
@@ -86,7 +97,20 @@ const LandingPage = () => {
         muted
       ></video>
 
-      <section className="relative h-full flex flex-col items-center justify-center mt-40 space-y-8">
+      <div className="h-screen flex flex-col items-center justify-center text-center text-white gap-y-3 ">
+        <p className="text-7xl font-extrabold w-3/5">
+          Moments Find Their Perfect Photographer Here!
+        </p>
+        <p className="text-xl mt-3 font-medium ">Explore, Choose & Create</p>
+        <button
+          onClick={() => navigate("/login")}
+          className="bg-green-500 text-white text-xl shadow-md px-8 py-4 rounded-lg font-bold mt-6 hover:text-black hover:bg-white"
+        >
+          Get Started
+        </button>
+      </div>
+
+      <section className="relative h-full flex flex-col items-center justify-center mt-20 space-y-8">
         <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 bg-white bg-opacity-90 p-6 rounded-md shadow-lg">
           <input
             className="px-4 py-2 rounded-md flex-1 bg-transparent border border-gray-300 text-black placeholder-gray-400"
