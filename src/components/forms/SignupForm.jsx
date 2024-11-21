@@ -19,11 +19,17 @@ const SignupForm = () => {
 
     try {
       const formData = new FormData(event.target);
-      const name = formData.get("name");
+      const firstName = formData.get("firstName");
+      const lastName = formData.get("lastName");
       const email = formData.get("email");
       const password = formData.get("password");
       const confirmPassword = formData.get("confirmPassword");
-      const studioName = role === "vendor" ? formData.get("studioName") : null;
+
+      if (!role) {
+        toast.error("Please select a role.");
+        setLoading(false);
+        return;
+      }
 
       if (password !== confirmPassword) {
         toast.error("Passwords do not match");
@@ -32,15 +38,13 @@ const SignupForm = () => {
       }
 
       const payload = {
-        name,
+        name: `${firstName} ${lastName}`,
         email,
         password,
-        // role,
-        ...(studioName && { studioName }),
+        role,
       };
 
       const response = await apiSignupForm(payload);
-      console.log(response.data);
       toast.success("Account Registered Successfully. Proceed to log in");
       event.target.reset();
       navigate("/LoginForm");
@@ -57,23 +61,33 @@ const SignupForm = () => {
       className="log-in flex flex-col justify-center items-center h-screen text-xs bg-cover bg-center"
       style={{ backgroundImage: `url(${studioBackground})` }}
     >
-      <div className="text-black text-xs flex flex-col justify-center items-center h-[60vh]">
-        <div className="max-w-sm w-full shadow-lg border rounded-lg p-6 bg-transparent my-11">
+      <div className="text-black flex flex-col justify-center items-center h-[60vh]">
+        <div className="max-w-sm w-full shadow-lg border rounded-lg p-6 bg-transparent my-4 md:my-11">
           <form onSubmit={handleSubmit}>
             <h1 className="flex justify-center mb-3 text-lg">Register With</h1>
             <div className="space-y-4">
               <div>
-                <label htmlFor="name" className="block mb-1">Full Name</label>
+                <label htmlFor="firstName" className="block mb-1">First Name</label>
                 <input
-                  id="name"
+                  id="firstName"
                   className="w-full bg-white border p-2 rounded-md"
                   type="text"
-                  placeholder="Enter your name"
+                  placeholder="Enter your first name"
                   required
-                  name="name"
+                  name="firstName"
                 />
               </div>
-
+              <div>
+                <label htmlFor="lastName" className="block mb-1">Last Name</label>
+                <input
+                  id="lastName"
+                  className="w-full bg-white border p-2 rounded-md"
+                  type="text"
+                  placeholder="Enter your last name"
+                  required
+                  name="lastName"
+                />
+              </div>
               <div>
                 <label htmlFor="role" className="block mb-1">Role</label>
                 <select
@@ -89,21 +103,6 @@ const SignupForm = () => {
                   <option value="vendor">VENDOR</option>
                 </select>
               </div>
-
-              {role === "vendor" && (
-                <div>
-                  <label htmlFor="studioName" className="block mb-1">Studio Name</label>
-                  <input
-                    id="studioName"
-                    className="w-full bg-white border p-2 rounded-md"
-                    type="text"
-                    placeholder="Enter Studio name"
-                    required
-                    name="studioName"
-                  />
-                </div>
-              )}
-
               <div>
                 <label htmlFor="email" className="block mb-1">Email</label>
                 <input
@@ -115,7 +114,6 @@ const SignupForm = () => {
                   name="email"
                 />
               </div>
-
               <div>
                 <label htmlFor="password" className="block mb-1">Password</label>
                 <input
@@ -127,7 +125,6 @@ const SignupForm = () => {
                   name="password"
                 />
               </div>
-
               <div>
                 <label htmlFor="confirmPassword" className="block mb-1">Confirm Password</label>
                 <input
@@ -140,7 +137,6 @@ const SignupForm = () => {
                 />
               </div>
             </div>
-
             <button
               type="submit"
               className="w-full mt-6 bg-green-500 p-2 rounded-lg text-white hover:bg-gray-700 duration-300"
@@ -148,14 +144,12 @@ const SignupForm = () => {
             >
               {loading ? "Registering..." : "Sign Up"}
             </button>
-
             <div className="text-xs mt-2 text-center">
               By creating an account you agree to the{" "}
               <Link to="/PrivacyPolicy">
                 <span className="font-bold underline">Terms and Services</span>
               </Link>.
             </div>
-
             <div className="flex justify-center mt-4 text-sm">
               <span>Already have an account?</span>
               <Link to="/LoginForm">

@@ -5,45 +5,44 @@ import { apiLoginForm } from "../../services/auth";
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true); // Set loading to true when login starts
+    setLoading(true); 
   
     try {
-      // Retrieve form data
+      
       const formData = new FormData(event.target);
       const email = formData.get("email");
       const password = formData.get("password");
   
-      // Send login request
       const response = await apiLoginForm({ email, password });
   
-      // Handle response
+    
       if (response.status === 200) {
         localStorage.setItem("token", response.data.accessToken);
   
-        if (response.data.role === "owner") {
-          localStorage.setItem("ownerRole", response.data.role);
+        if (response.data.role === "vendor") {
+          localStorage.setItem("vendorRole", response.data.role);
         } else {
           localStorage.setItem("userRole", response.data.role);
         }
   
-        // Notify success and navigate to the dashboard
+        
         toast.success("You are logged in");
         navigate("/dashboard");
       } else {
-        // Handle unsuccessful login attempt
+        
         toast.error("Failed to log in");
-        return; // Stop further execution
+        return; 
       }
     } catch (error) {
-      // Handle errors during the login process
+      
       console.error(error);
       toast.error("An unexpected error occurred");
     } finally {
-      // Reset loading state after login attempt
+      
       setLoading(false);
     }
   };
@@ -98,9 +97,9 @@ const LoginForm = () => {
             <button
               type="submit"
               className="flex justify-center bg-green-500 p-2 rounded-lg"
-              disabled={loading} // Disable button when loading
+              disabled={loading} 
             >
-              {loading ? "Logging in..." : "Login"} {/* Button text changes based on loading state */}
+              {loading ? "Logging in..." : "Login"} 
             </button>
             <div>
               <span className="flex justify-center mb-4">or sign in with</span>

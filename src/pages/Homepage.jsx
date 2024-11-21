@@ -19,7 +19,7 @@ const Homepage = () => {
           backgroundImage: "url('./src/assets/images/landingpage.jpg')",
         }}
       >
-        {/*Overlay Text with Typewriter Effect */}
+        
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white space-y-2">
           <p className="text-3xl font-extrabold typewriter">Moments Find Their Perfect Photographer Here!</p>
           <p className="text-2xl mt-2 font-bold typewriter">Explore, Choose & Create</p>

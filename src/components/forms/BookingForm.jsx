@@ -20,7 +20,7 @@ const BookingForm = () => {
         <form className=" text-white shadow-md round px-8 pt-6 pb-8 mb-4 max-w-md mx-auto">
           <h2 className="text-2xl font-bold mb-4">Book a Studio</h2>
           <div className="flex gap-4">
-            {/* name field */}
+          
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -35,7 +35,7 @@ const BookingForm = () => {
                 required
               />
 
-              {/* email field */}
+          
             </div>
 
             <div className="mb-4">

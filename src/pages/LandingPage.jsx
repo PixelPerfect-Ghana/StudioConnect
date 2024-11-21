@@ -52,7 +52,7 @@ const LandingPage = () => {
       ></video>
       
       <section className="relative h-full flex flex-col items-center justify-center mt-40 space-y-8">
-        {/* Search Form */}
+        
         <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 bg-white bg-opacity-90 p-6 rounded-md shadow-lg">
           <input
             className="px-4 py-2 rounded-md flex-1 bg-transparent border border-gray-300 text-black placeholder-gray-400"
@@ -96,7 +96,7 @@ const LandingPage = () => {
           </button>
         </div>
 
-        {/* Search Results */}
+        
         <div className="bg-white bg-opacity-90 p-6 rounded-md shadow-lg w-full sm:w-3/4 md:w-2/3 lg:w-1/2">
           {filteredStudios.length > 0 ? (
             filteredStudios.map((studio) => (
