@@ -13,23 +13,23 @@ const DashboardLayout = () => {
         toggleSidebar={() => setSidebarOpen(!isSidebarOpen)}
       />
 
-      <div className="flex flex-col w-full">
-        <nav className="bg-white shadow-md  w-full flex h-16 z-50 items-center px-4">
+      <div className="flex flex-col w-full ml-64">
+        <nav className="bg-white shadow-md w-full flex h-16 z-50 items-center px-4">
           <button
             onClick={() => setSidebarOpen(!isSidebarOpen)}
-            className="p-2 rounded-md text-gray-600 hover:text-gray-900 mr-auto"
+            className="p-2 rounded-md  text-gray-900 hover:text-green-500 mr-auto"
           >
             <FaBars className="h-6 w-6" />
           </button>
 
           <div className="flex items-center gap-x-3">
-            <button to="/" className="text-gray-600 hover:text-gray-900">
+            <button to="/" className="text-gray-900 hover:text-green-500">
               <FaHome className="h-6 w-6" />
             </button>
-            <button className="p-2 text-gray-600 hover:text-gray-900">
+            <button className="p-2 text-gray-900 hover:text-green-500">
               <FaBell className="h-6 w-6" />
             </button>
-            <button className="p-2 text-gray-600 hover:text-gray-900">
+            <button className="p-2 text-gray-900 hover:text-green-500">
               <FaUserCircle className="h-6 w-6" />
             </button>
           </div>

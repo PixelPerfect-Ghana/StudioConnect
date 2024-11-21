@@ -1,5 +1,52 @@
-import { Link, useNavigate } from "react-router-dom";
-import { FaSignOutAlt } from "react-icons/fa";
+import { Link, useNavigate, NavLink } from "react-router-dom";
+
+import {
+  FaSignOutAlt,
+  FaHome,
+  FaCompass,
+  FaCalendarAlt,
+  FaCogs,
+  FaUserTie,
+} from "react-icons/fa";
+
+const navItems = [
+  {
+    icon: FaHome,
+    path: "/dashboard",
+    label: "Home",
+    showFor: ["user", "vendor"],
+  },
+  {
+    icon: FaCompass,
+    path: "/dashboard/allstudios",
+    label: "Explore Studios",
+    showFor: ["user"],
+  },
+  {
+    icon: FaCalendarAlt,
+    path: "/bookings",
+    label: "My Bookings",
+    showFor: ["user"],
+  },
+  {
+    icon: FaCogs,
+    path: "/manage-studios",
+    label: "Manage Studios",
+    showFor: ["vendor"],
+  },
+  {
+    icon: FaCalendarAlt,
+    path: "/bookings",
+    label: "View Bookings",
+    showFor: ["vendor"],
+  },
+  {
+    icon: FaUserTie,
+    path: "/studios/add",
+    label: "Become a Vendor",
+    showFor: ["user"],
+  },
+];
 
 const Sidebar = () => {
   const userRole = localStorage.getItem("role");
@@ -12,38 +59,37 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-64 bg-gray-800 text-white h-screen p-4 flex flex-col py-10">
-      <h2 className="text-2xl font-bold mb-4">PixelPerfect</h2>
-      <nav className="mt-4">
-        <Link to="/dashboard" className="block py-2">
-          Home
-        </Link>
-
-        {/* Links specific to each user role */}
-        {userRole === "user" && (
-          <>
-            <Link to="/dashboard/allstudios" className="block py-2">
-              Explore Studios
-            </Link>
-            <Link to="/bookings" className="block py-2">
-              My Bookings
-            </Link>
-          </>
-        )}
-        {userRole === "vendor" && (
-          <>
-            <Link to="/manage-studios" className="block py-2">
-              Manage Studios
-            </Link>
-            <Link to="/bookings" className="block py-2">
-              View Bookings
-            </Link>
-          </>
-        )}
+    <div className="w-64 bg-black/90 text-white h-screen p-4 flex flex-col gap-y-8 py-10 fixed z-50 left-0">
+      <Link
+        to="/"
+        className="text-3xl font-bold text-center text-green-500 mb-4"
+      >
+        PixelPerfect
+      </Link>
+      <nav className=" flex flex-col text-base gap-y-4">
+        {navItems
+          .filter((item) => item.showFor.includes(userRole))
+          .map(({ icon: Icon, path, label }, index) => (
+            <NavLink
+              key={index}
+              to={path}
+              className={({ isActive }) =>
+                `flex items-center gap-x-4 py-2 px-3 rounded-md ${
+                  isActive
+                    ? "bg-green-500 text-white"
+                    : "hover:bg-green-500 hover:text-white"
+                }`
+              }
+              end
+            >
+              <Icon className="size-6" />
+              {label}
+            </NavLink>
+          ))}
       </nav>
       <button
         onClick={handleLogout}
-        className="p-2 text-white hover:text-gray-500 flex gap-x-2 mt-auto"
+        className="flex items-center gap-x-4 py-2 px-3 rounded-md bg-green-500 text-white mt-auto"
       >
         <FaSignOutAlt className="h-6 w-6" /> <span>Logout</span>
       </button>
