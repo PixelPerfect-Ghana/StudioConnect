@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import StudiosAdv from "../pages/StudiosAdv";
+import StudiosAdv from "./StudiosAdv";
 
 // Mock data for studios
 const studios = [
