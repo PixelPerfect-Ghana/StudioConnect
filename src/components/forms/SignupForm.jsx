@@ -1,17 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { apiSignupForm } from "../../services/auth";
+import { apiSignUp } from "../../services/auth";
 import studioBackground from "../../assets/images/studio2.jpg";
 
 const SignupForm = () => {
-  const [role, setRole] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const handleRoleChange = (event) => {
-    setRole(event.target.value);
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,12 +20,6 @@ const SignupForm = () => {
       const password = formData.get("password");
       const confirmPassword = formData.get("confirmPassword");
 
-      if (!role) {
-        toast.error("Please select a role.");
-        setLoading(false);
-        return;
-      }
-
       if (password !== confirmPassword) {
         toast.error("Passwords do not match");
         setLoading(false);
@@ -38,16 +27,16 @@ const SignupForm = () => {
       }
 
       const payload = {
-        name: `${firstName} ${lastName}`,
+        firstName,
+        lastName,
         email,
         password,
-        role,
       };
 
-      const response = await apiSignupForm(payload);
-      toast.success("Account Registered Successfully. Proceed to log in");
+      const response = await apiSignUp(payload);
+      toast.success(response.data.message);
       event.target.reset();
-      navigate("/LoginForm");
+      navigate("/login");
     } catch (error) {
       console.error("Signup error:", error.response?.data || error.message);
       toast.error("Failed to register. Please try again.");
@@ -67,7 +56,9 @@ const SignupForm = () => {
             <h1 className="flex justify-center mb-3 text-lg">Register With</h1>
             <div className="space-y-4">
               <div>
-                <label htmlFor="firstName" className="block mb-1">First Name</label>
+                <label htmlFor="firstName" className="block mb-1">
+                  First Name
+                </label>
                 <input
                   id="firstName"
                   className="w-full bg-white border p-2 rounded-md"
@@ -78,7 +69,9 @@ const SignupForm = () => {
                 />
               </div>
               <div>
-                <label htmlFor="lastName" className="block mb-1">Last Name</label>
+                <label htmlFor="lastName" className="block mb-1">
+                  Last Name
+                </label>
                 <input
                   id="lastName"
                   className="w-full bg-white border p-2 rounded-md"
@@ -88,23 +81,11 @@ const SignupForm = () => {
                   name="lastName"
                 />
               </div>
+
               <div>
-                <label htmlFor="role" className="block mb-1">Role</label>
-                <select
-                  id="role"
-                  className="border p-2 rounded w-full"
-                  value={role}
-                  onChange={handleRoleChange}
-                  name="role"
-                  required
-                >
-                  <option value="" disabled>Select Role</option>
-                  <option value="user">USER</option>
-                  <option value="vendor">VENDOR</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="email" className="block mb-1">Email</label>
+                <label htmlFor="email" className="block mb-1">
+                  Email
+                </label>
                 <input
                   id="email"
                   className="w-full bg-white border p-2 rounded-md"
@@ -115,7 +96,9 @@ const SignupForm = () => {
                 />
               </div>
               <div>
-                <label htmlFor="password" className="block mb-1">Password</label>
+                <label htmlFor="password" className="block mb-1">
+                  Password
+                </label>
                 <input
                   id="password"
                   className="w-full bg-white border p-2 rounded-md"
@@ -126,7 +109,9 @@ const SignupForm = () => {
                 />
               </div>
               <div>
-                <label htmlFor="confirmPassword" className="block mb-1">Confirm Password</label>
+                <label htmlFor="confirmPassword" className="block mb-1">
+                  Confirm Password
+                </label>
                 <input
                   id="confirmPassword"
                   className="w-full bg-white border p-2 rounded-md"
@@ -148,12 +133,15 @@ const SignupForm = () => {
               By creating an account you agree to the{" "}
               <Link to="/PrivacyPolicy">
                 <span className="font-bold underline">Terms and Services</span>
-              </Link>.
+              </Link>
+              .
             </div>
             <div className="flex justify-center mt-4 text-sm">
               <span>Already have an account?</span>
               <Link to="/LoginForm">
-                <span className="text-green-600 ml-2 hover:underline">Login</span>
+                <span className="text-green-600 ml-2 hover:underline">
+                  Login
+                </span>
               </Link>
             </div>
           </form>

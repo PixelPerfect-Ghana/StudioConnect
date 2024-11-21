@@ -1,19 +1,19 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './App.css';
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import BookingForm from './components/forms/BookingForm';
-import Dashboard from './components/Dashboard';
-import HomePage from './pages/Homepage';
-import LandingPage from './pages/LandingPage';
-import LoginForm from './components/forms/LoginForm';
-import SignupForm from './components/forms/SignupForm';
-import AddStudioForm from './components/forms/AddStudioForm';
-import PrivacyPolicy from './components/forms/PrivacyPolicy';
-import StudioDetails from './pages/StudioDetails';
-import StudioList from './pages/StudioList';
-import UpdateStudioForm from './components/forms/UpdateStudioForm';
-import VendorStudios from './pages/VendorStudios';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./App.css";
+
+import BookingForm from "./components/forms/BookingForm";
+import HomePage from "./pages/Homepage";
+import LandingPage from "./pages/LandingPage";
+import LoginForm from "./components/forms/LoginForm";
+import SignupForm from "./components/forms/SignupForm";
+import AddStudioForm from "./components/forms/AddStudioForm";
+import PrivacyPolicy from "./components/forms/PrivacyPolicy";
+import StudioDetails from "./pages/StudioDetails";
+import StudioList from "./pages/StudioList";
+import UpdateStudioForm from "./components/forms/UpdateStudioForm";
+import VendorStudios from "./pages/VendorStudios";
+import DashboardLayout from "./layout/DashboardLayout";
+import Home from "./pages/dashboard/Home";
 
 function App() {
   const router = createBrowserRouter([
@@ -33,10 +33,7 @@ function App() {
       path: "/signup",
       element: <SignupForm />,
     },
-    {
-      path: "/booking",
-      element: <BookingForm />,
-    },
+
     {
       path: "/addstudio",
       element: <AddStudioForm />,
@@ -47,20 +44,31 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: <Dashboard />,
+      element: <DashboardLayout />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "allstudios",
+          element: <StudioList />,
+        },
+      ],
     },
     {
-      path: "/singlestudio",
-      element: <StudioDetails />,
+      path: "booking",
+      element: <BookingForm />,
     },
     {
-      path: "/allstudios",
-      element: <StudioList />,
-    },
-    {
-      path: "/vendor-studios",
+      path: "vendor-studios",
       element: <VendorStudios />,
     },
+    {
+      path: "/singlestudio/:id",
+      element: <StudioDetails />,
+    },
+
     {
       path: "/edit-studio/:id",
       element: <UpdateStudioForm />,
@@ -70,7 +78,6 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
-      <ToastContainer /> 
     </>
   );
 }

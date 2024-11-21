@@ -1,37 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { apiGetStudios, apiDeleteStudio } from "../../services/Studios";
+// import { apiGetStudios, apiDeleteStudio } from "../../services/Studios";
 import { toast } from "react-toastify";
 
 const VendorStudios = () => {
   const [studios, setStudios] = useState([]);
   const [loading, setLoading] = useState(false);
 
-//   const fetchStudios = async () => {
-//     try {
-//       setLoading(true);
-//       const response = await apiGetStudios(); // Replace with your API call
-//       setStudios(response.data);
-//     } catch (error) {
-//       toast.error("Failed to fetch studios.");
-//       console.error(error);
-//     } finally {
-//       setLoading(false);
-//     }
-  };
+  //   const fetchStudios = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const response = await apiGetStudios(); // Replace with your API call
+  //       setStudios(response.data);
+  //     } catch (error) {
+  //       toast.error("Failed to fetch studios.");
+  //       console.error(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  // };
 
-//   const handleDelete = async (studioId) => {
-//     if (window.confirm("Are you sure you want to delete this studio?")) {
-//       try {
-//         await apiDeleteStudio(studioId); // make API call
-//         toast.success("Studio deleted successfully!");
-//         fetchStudios(); // Refresh the list
-//       } catch (error) {
-//         toast.error("Failed to delete studio.");
-//         console.error(error);
-//       }
-//     }
-  };
+  //   const handleDelete = async (studioId) => {
+  //     if (window.confirm("Are you sure you want to delete this studio?")) {
+  //       try {
+  //         await apiDeleteStudio(studioId); // make API call
+  //         toast.success("Studio deleted successfully!");
+  //         fetchStudios(); // Refresh the list
+  //       } catch (error) {
+  //         toast.error("Failed to delete studio.");
+  //         console.error(error);
+  //       }
+  //     }
+  // };
 
   useEffect(() => {
     fetchStudios();

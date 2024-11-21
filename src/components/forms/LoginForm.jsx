@@ -1,75 +1,44 @@
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { apiLoginForm } from "../../services/auth";
+import { apiLogin } from "../../services/auth";
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true); 
-  
+    setLoading(true);
+
     try {
-      
       const formData = new FormData(event.target);
       const email = formData.get("email");
       const password = formData.get("password");
-  
-      const response = await apiLoginForm({ email, password });
-  
-    
-      if (response.status === 200) {
-        localStorage.setItem("token", response.data.accessToken);
-  
-        if (response.data.role === "vendor") {
-          localStorage.setItem("vendorRole", response.data.role);
-        } else {
-          localStorage.setItem("userRole", response.data.role);
-        }
-  
-        
-        toast.success("You are logged in");
-        navigate("/dashboard");
-      } else {
-        
-        toast.error("Failed to log in");
-        return; 
-      }
+
+      const response = await apiLogin({ email, password });
+
+      localStorage.setItem("token", response.data?.accessToken);
+      localStorage.setItem("role", response.data?.role);
+      toast.success(response.data.message);
+      navigate("/dashboard");
     } catch (error) {
-      
       console.error(error);
       toast.error("An unexpected error occurred");
     } finally {
-      
       setLoading(false);
     }
   };
-  
-      
-    //    else {
-    //     toast.error("Failed to log in"); // Toast error notification
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    //   toast.error("Failed to log in"); // Toast error notification
-    // } finally {
-    //   setLoading(false); // Reset loading state after login attempt
-    // }
-
 
   return (
-    <div 
-      className="log-in flex flex-col justify-center items-center h-screen text-xs bg-cover bg-center" 
+    <div
+      className="log-in flex flex-col justify-center items-center h-screen text-xs bg-cover bg-center"
       style={{ backgroundImage: "url('./src/assets/images/studio2.jpg')" }}
     >
       <div className="max-w-sm w-full bg-transparent shadow-lg rounded-lg p-6 border border-black">
         <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-3">
-            <h1 className="flex justify-center font-extrabold">
-              User Login
-            </h1>
+            <h1 className="flex justify-center font-extrabold">User Login</h1>
             <p className="flex justify-center font-bold">
               Hey! Enter your details to sign in to your account
             </p>
@@ -97,9 +66,9 @@ const LoginForm = () => {
             <button
               type="submit"
               className="flex justify-center bg-green-500 p-2 rounded-lg"
-              disabled={loading} 
+              disabled={loading}
             >
-              {loading ? "Logging in..." : "Login"} 
+              {loading ? "Logging in..." : "Login"}
             </button>
             <div>
               <span className="flex justify-center mb-4">or sign in with</span>
@@ -138,6 +107,5 @@ const LoginForm = () => {
     </div>
   );
 };
-
 
 export default LoginForm;

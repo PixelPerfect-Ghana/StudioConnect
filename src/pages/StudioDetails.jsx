@@ -1,7 +1,5 @@
-
-
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 // dummy data
 const sampleStudios = [
@@ -10,22 +8,28 @@ const sampleStudios = [
     name: "Studio One",
     location: "Greater Accra",
     description: "A creative space for all your photography needs.",
-    images: ["/path/to/image1.jpg", "/path/to/image2.jpg", "/path/to/image3.jpg"],
+    images: [
+      "/path/to/image1.jpg",
+      "/path/to/image2.jpg",
+      "/path/to/image3.jpg",
+    ],
   },
   {
     id: 2,
     name: "Creative Shots",
     location: "Eastern Region",
     description: "A modern studio with all the latest equipment.",
-    images: ["/path/to/image1.jpg", "/path/to/image2.jpg", "/path/to/image3.jpg"],
+    images: [
+      "/path/to/image1.jpg",
+      "/path/to/image2.jpg",
+      "/path/to/image3.jpg",
+    ],
   },
-  
 ];
 
 const StudioDetails = () => {
-  const { studioId } = useParams();
-  const studio = sampleStudios.find((studio) => studio.id === parseInt(studioId));
-
+  const { id } = useParams();
+  const studio = sampleStudios.find((studio) => studio.id === parseInt(id));
 
   return (
     <div className="max-w-3xl mx-auto p-6">
@@ -41,11 +45,14 @@ const StudioDetails = () => {
             className="w-1/3 rounded-md"
           />
         ))}
-        <Link to="/BookingForm"><button className="bg-green-500 text-white text-sm font-semibold p-2 rounded-md hover:bg-green-600 transition-colors">Book Us</button></Link>
+        <Link to="/BookingForm">
+          <button className="bg-green-500 text-white text-sm font-semibold p-2 rounded-md hover:bg-green-600 transition-colors">
+            Book Us
+          </button>
+        </Link>
       </div>
     </div>
   );
 };
 
 export default StudioDetails;
-

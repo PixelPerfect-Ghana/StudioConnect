@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { apiGetStudioDetails, apiUpdateStudio } from "../../services/Studios";
 import { toast } from "react-toastify";
+import {
+  apiGetStudioById,
+  apiUpdateStudioDetails,
+} from "../../services/studios";
 
 const UpdateStudioForm = () => {
   const { id } = useParams();
@@ -13,7 +16,7 @@ const UpdateStudioForm = () => {
   useEffect(() => {
     const fetchStudioDetails = async () => {
       try {
-        const response = await apiGetStudioDetails(id); // Fetch studio details by ID
+        const response = await apiGetStudioById(id); // Fetch studio details by ID
         setStudio(response.data);
       } catch (error) {
         toast.error("Failed to fetch studio details.");
@@ -36,7 +39,7 @@ const UpdateStudioForm = () => {
         formData.append("image", image); // Include the new image if uploaded
       }
 
-      await apiUpdateStudio(id, formData); // Send the FormData to the API
+      await apiUpdateStudioDetails(id, formData); // Send the FormData to the API
       toast.success("Studio updated successfully!");
       navigate("/vendor-studios");
     } catch (error) {
