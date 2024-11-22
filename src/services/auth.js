@@ -8,6 +8,10 @@ export const apiLogin = async (payload) => {
   return await apiClient.post("/users/login", payload);
 };
 
+export const apiGetProfile = async () => {
+  return await apiClient.get("/users/me");
+};
+
 export const apiForgotPassword = async (payload) => {
   return await apiClient.post("users/forgot-password", payload);
 };

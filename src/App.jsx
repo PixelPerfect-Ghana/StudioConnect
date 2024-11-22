@@ -9,7 +9,6 @@ import PrivacyPolicy from "./components/forms/PrivacyPolicy";
 import StudioDetails from "./pages/studio/StudioDetails";
 import StudioList from "./pages/studio/StudioList";
 import UpdateStudioForm from "./components/forms/UpdateStudioForm";
-import VendorStudios from "./pages/studio/VendorStudios";
 import DashboardLayout from "./layout/DashboardLayout";
 import Home from "./pages/dashboard/Home";
 import Bookings from "./pages/dashboard/Bookings";
@@ -50,25 +49,21 @@ function App() {
           element: <AddStudioForm />,
         },
         {
+          path: "manage-studio",
+          element: <UpdateStudioForm />,
+        },
+        {
+          path: "studios/:id",
+          element: <StudioDetails />,
+        },
+
+        {
           path: "bookings",
           element: <Bookings />,
         },
         {
           path: "bookings/add",
           element: <BookingForm />,
-        },
-        {
-          path: "vendor-studios",
-          element: <VendorStudios />,
-        },
-        {
-          path: "singlestudio/:id",
-          element: <StudioDetails />,
-        },
-
-        {
-          path: "edit-studio/:id",
-          element: <UpdateStudioForm />,
         },
       ],
     },

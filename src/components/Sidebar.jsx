@@ -1,5 +1,4 @@
 import { Link, useNavigate, NavLink } from "react-router-dom";
-
 import {
   FaSignOutAlt,
   FaHome,
@@ -8,6 +7,7 @@ import {
   FaCogs,
   FaUserTie,
 } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const navItems = [
   {
@@ -30,8 +30,8 @@ const navItems = [
   },
   {
     icon: FaCogs,
-    path: "/dashboard/manage-studios",
-    label: "Manage Studios",
+    path: "/dashboard/manage-studio",
+    label: "Manage Studio",
     showFor: ["vendor"],
   },
   {
@@ -48,23 +48,29 @@ const navItems = [
   },
 ];
 
-const Sidebar = () => {
-  const userRole = localStorage.getItem("role");
+const Sidebar = ({ isOpen }) => {
   const navigate = useNavigate();
+
+  const userRole = localStorage.getItem("role");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    localStorage.removeItem("role");
     toast.info("Logged out successfully!");
+    navigate("/login");
   };
 
   return (
-    <div className="w-64 bg-black/90 text-white h-screen p-4 flex flex-col gap-y-8 py-10 fixed z-50 left-0">
+    <div
+      className={`${
+        isOpen ? "w-64" : "w-20"
+      } bg-black/90 text-white h-screen p-4 flex flex-col gap-y-8 pt-6 pb-10 fixed z-50 left-0`}
+    >
       <Link
         to="/"
-        className="text-3xl font-bold text-center text-green-500 mb-4"
+        className="text-4xl font-bold text-center text-green-500 mb-4"
       >
-        PixelPerfect
+        {isOpen ? "PixelPerfect" : "P"}
       </Link>
       <nav className=" flex flex-col text-base gap-y-4">
         {navItems
@@ -83,7 +89,7 @@ const Sidebar = () => {
               end
             >
               <Icon className="size-6" />
-              {label}
+              {isOpen && <span>{label}</span>}
             </NavLink>
           ))}
       </nav>
@@ -91,7 +97,7 @@ const Sidebar = () => {
         onClick={handleLogout}
         className="flex items-center gap-x-4 py-2 px-3 rounded-md bg-green-500 text-white mt-auto"
       >
-        <FaSignOutAlt className="h-6 w-6" /> <span>Logout</span>
+        <FaSignOutAlt className="h-6 w-6" /> {isOpen && <span>Logout</span>}
       </button>
     </div>
   );

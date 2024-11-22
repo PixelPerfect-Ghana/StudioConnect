@@ -8,6 +8,9 @@ export const apiGetAllStudios = async () => {
   return await apiClient.get("/studios");
 };
 
+export const apiGetUserStudio = async () => {
+  return await apiClient.get(`/studios/me`);
+};
 export const apiGetStudioById = async (id) => {
   return await apiClient.get(`/studios/${id}`);
 };

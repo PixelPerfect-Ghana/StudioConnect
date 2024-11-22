@@ -11,7 +11,7 @@ const StudioAdv = ({ image, StudioName, location, description, key, id }) => {
         <h2 className="text-lg font-semibold text-gray-800">{StudioName}</h2>
         <p className="text-sm text-gray-500">{location}</p>
         <p className="text-sm text-gray-700 mt-2 line-clamp-3">{description}</p>
-        <Link to={`/singlestudio/${id}`}>
+        <Link to={`/dashboard/studios/${id}`}>
           <button className="mt-4 w-full bg-green-500 text-white text-sm font-semibold p-2 rounded-md hover:bg-green-600 transition-colors">
             View Details
           </button>
